@@ -1,0 +1,166 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Money</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        main {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #337ab7;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            height: 35px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        button {
+            width: 100%;
+            height: 35px;
+            background-color: #337ab7;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #286090;
+        }
+
+        #status-message {
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="recipients.html">Recipients</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Send Money</h1>
+            <form id="send-money-form">
+                <label for="recipient">Recipient:</label>
+                <input type="text" id="recipient" required><br><br>
+                <label>Amount:</label>
+                <input type="number" id="amount-input" name="amount"><br><br>
+                <button id="send-button">Send Money</button>
+            </form>
+            <p id="status-message"></p>
+        </section>
+    </main>
+    <script>
+        
+const sendMoneyForm = document.getElementById('send-money-form');
+const recipientInput = document.getElementById('recipient');
+const amountInput = document.getElementById('amount-input');
+const statusMessage = document.getElementById('status-message');
+
+sendMoneyForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const recipient = recipientInput.value.trim();
+    const amount = amountInput.valueAsNumber;
+
+    // Validate fields
+    if (!recipient || !amount) {
+        statusMessage.textContent = 'Please fill in both fields';
+        return;
+    }
+
+    if (amount <= 0) {
+        statusMessage.textContent = 'Amount must be greater than 0';
+        return;
+    }
+
+    try {
+        const response = await fetch('/send-money', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ recipient, amount }),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            statusMessage.textContent = 'Money sent successfully';
+        } else {
+            statusMessage.textContent = data.message;
+        }
+    } catch (error) {
+        statusMessage.textContent = 'Error sending money';
+        console.error(error);
+    }
+});
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

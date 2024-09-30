@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top-up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+    
+    #top-up-form {
+      max-width: 300px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    #amount {
+      width: 100%;
+      height: 40px;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    button[type="submit"] {
+      width: 100%;
+      height: 40px;
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    button[type="submit"]:hover {
+      background-color: #3e8e41;
+    }
+  </style>
+</head>
+<body>
+  <form id="top-up-form">
+    <input type="number" id="amount" placeholder="Enter top-up amount">
+    <button type="submit">Top-up</button>
+  </form>
+  <script>
+    const form = document.getElementById('top-up-form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const amount = document.getElementById('amount').value;
+      try {
+        const response = await fetch('/top-up', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ amount }),
+        });
+        const result = await response.json();
+        if (result.success) {
+          alert('Top-up successful!');
+          // Update balance display
+        } else {
+          alert('Top-up failed!');
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+

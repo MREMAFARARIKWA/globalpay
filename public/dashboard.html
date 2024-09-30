@@ -1,0 +1,106 @@
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GlobalPay Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+    
+    .dashboard {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      text-align: center;
+      color: #337ab7;
+    }
+    
+    .welcome-message {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .balance {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .actions {
+      display: flex;
+      justify-content: center;
+    }
+    
+    .action-button {
+      width: 200px;
+      height: 40px;
+      margin: 0 10px;
+      background-color: #337ab7;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <h1>$Global Pay$</h1><br><br>
+    <div class="welcome-message" id="welcome-message"></div>
+    <div class="balance" id="balance">balance: $<span id="balance-value">0.00</span></div>
+    <div class="actions">
+      <button class="action-button" id="top-up-button">Top up</button>
+      <button class="action-button" id="add-recipient-button">Add recipient</button>
+      <button class="action-button" id="send-money-button">Send money</button>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('/user-data')
+        .then(response => response.json())
+        .then(data => {
+          const welcomeMessage = document.getElementById('welcome-message');
+          const balanceValue = document.getElementById('balance-value');
+          
+          welcomeMessage.innerText = `Welcome, ${data.username}!`;
+          balanceValue.innerText = data.balance.toFixed(2);
+        
+        })
+        .catch(error => console.error(error));
+    });
+    
+    // Add event listeners to buttons
+    document.getElementById('top-up-button').addEventListener('click', () => {
+      window.location.href = 'top_up.html';
+    });
+    
+    document.getElementById('add-recipient-button').addEventListener('click', () => {
+      window.location.href = 'add_recipient.html';
+    });
+    
+    document.getElementById('send-money-button').addEventListener('click', () => {
+      window.location.href = 'send-money.html';
+    });
+  </script>
+  <script src="script.js"></script>
+
+</body>
+</html>
+
+
+
+
+

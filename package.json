@@ -1,0 +1,22 @@
+{
+  "name": "globalpay",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "script.js",
+  "scripts": {
+    "start": "node script.cjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "express-session": "^1.18.0",
+    "express-validator": "^7.2.0",
+    "sequelize": "^6.21.4"
+  },
+  "description": ""
+}

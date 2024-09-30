@@ -1,0 +1,97 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>$Global Pay$</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    
+      
+    }
+    
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    #add_recipient-form {
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    input[type="text"], input[type="email"], input[type="tel"] {
+      width: 100%;
+      height: 40px;
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    button {
+      width: 100%;
+      height: 40px;
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #3e8e41;
+    }
+  </style>
+</head>
+<body>
+  <h1>$Global Pay$</h1>
+  <h2>Add Recipient</h2>
+  <form id="add_recipient-form" action="/add_recipient" method="post">
+    <label for="recipient-name">Name:</label>
+    <input type="text" id="recipient-name" name="name" required>
+    <label for="recipient-email">Email:</label>
+    <input type="email" id="recipient-email" name="email" required>
+    <label for="recipient-phone">Phone:</label>
+    <input type="tel" id="recipient-phone" name="phone" required>
+    <button id="add_recipient-btn">Add Recipient</button>
+  </form>
+  <script>
+    const form = document.getElementById('add-recipient-form');
+  
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      fetch('/add-recipient', {
+        method: 'POST',
+        body: formData
+      })
+      .then((response) => response.text())
+      .then((message) => console.log(message))
+      .catch((error) => console.error(error));
+    });
+  </script>
+</body>
+</html>
+
+
